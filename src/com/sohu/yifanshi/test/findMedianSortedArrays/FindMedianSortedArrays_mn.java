@@ -1,6 +1,6 @@
 package com.sohu.yifanshi.test.findMedianSortedArrays;
 
-public class FindMedianSortedArrays {
+public class FindMedianSortedArrays_mn {
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int[] nums = new int[nums1.length+nums2.length];
         int i=0,j=0,k=0;

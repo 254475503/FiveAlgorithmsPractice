@@ -24,8 +24,6 @@ public class Solution {
         list.add(0,1);
         for(int i = 0 ;i < nums.length ; i ++)
         {
-            if(nums[i]==0)
-                return 0;
             list.add(i+1,nums[i]);
 
         }
