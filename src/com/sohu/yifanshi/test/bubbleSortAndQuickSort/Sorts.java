@@ -46,7 +46,7 @@ public class Sorts {
                 low++;
             nums[high] = nums[low];
         }
-        nums[low] = pivotkey;//防止pivotkey
+        nums[low] = pivotkey;//放置pivotkey
         //这一次快速排序以后，保证的是pivotkey左边是比她小的，右边是比她大的。我们在递归的，将pivotkey的左右进行快速排序
         //最后就是一个有序的数组了。
         quickSort(start,low-1);
