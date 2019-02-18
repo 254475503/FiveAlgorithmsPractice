@@ -42,7 +42,7 @@ public class Solution {
         for(int i = 1; i < list.size()-1 ; i ++)
         {
             int temp = list.get(i-1)*list.get(i)*list.get(i+1);
-            List<Integer> tempList =new ArrayList<>(list);
+            List<Integer> tempList =new ArrayList<Integer>(list);
             tempList.remove(i);
             q = max(q,temp+maxCoins(tempList));
         }
