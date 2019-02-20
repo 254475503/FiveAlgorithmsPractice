@@ -6,7 +6,7 @@ public class FindMedianSortedArrays_logn {
         if(n1 == 1)
         {//递归结束条件
             if(n2 == 1)
-                return vec1[0] < vec2[0] ? vec1[0] : vec2[0];
+                return vec1[0] < vec2[0] ? vec1[0] : vec2[0];//这种情况是总共偶数个数字，选出了最中间的两个数 返回谁都无所谓。
             if(n2 % 2 == 0)//如果长的哪一个数组还剩下偶数个数字
             {
                 if(vec1[0] >= vec2[m2+1])
