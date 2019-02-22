@@ -7,16 +7,57 @@ public class Sorts {
     {
         for(int i = 0 ; i < nums.length ; i ++)
         {
-            for(int j = 0 ; j < nums.length - i ; j++)
+            for(int j = 0 ; j < nums.length - 1 ; j++)
             {
                 if(nums[j]<nums[j+1])
                 {
-                    nums[j] += nums[i];
-                    nums[i] = nums[j] - nums[i];
-                    nums[j] -= nums[i];
+                    nums[j] += nums[j+1];
+                    nums[j+1] = nums[j] - nums[j+1];
+                    nums[j] -= nums[j+1];
                 }
             }
         }
+    }
+
+
+    public void bubbleSort_pro()
+    {
+
+        for(int i = 0 ; i < nums.length ; i ++)
+            for(int j = 0 ; j < nums.length-1-i ; j ++)
+            {
+                if(nums[j]<nums[j+1])
+                {
+                    nums[j] += nums[j+1];
+                    nums[j+1] = nums[j] - nums[j+1];
+                    nums[j] -= nums[j+1];
+
+                }
+            }
+    }
+    public void bubblesort_finalpro()
+    {
+        int mark = 0;//用mark位记录最后一次进行换位置的地方，说明那个位位置之后的数组都是有序的，就不需要排序了。
+        int i  = 0;
+        while(i<nums.length)
+        {
+            for(int j = 0 ; j < nums.length - 1 - i ; j ++){
+                if(nums[j]<nums[j+1])
+                {
+                    nums[j] += nums[j+1];
+                    nums[j+1] = nums[j] - nums[j+1];
+                    nums[j] -= nums[j+1];
+                    mark = nums.length-(j+1);
+                }
+            }
+
+            if(i==mark)
+                i = nums.length;
+            else
+                i = mark;
+        }
+
+
     }
 
     //快速排序，排序之前选取一个目标值，(默认升序排序)把所有小于这个值的值放在他的前面，把所有大于他的值放在他的后面
