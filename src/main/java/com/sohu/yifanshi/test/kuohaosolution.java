@@ -4,6 +4,7 @@ import java.util.Stack;
 
 public class kuohaosolution {
     public static void main(String[] args) {
+
         String S = "(()()())";
         System.out.println(minAddToMakeValid(S));
     }

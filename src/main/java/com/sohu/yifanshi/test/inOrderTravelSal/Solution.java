@@ -23,6 +23,8 @@ public class Solution {//二叉树的中序遍历
     //节点重复这个操作。如果出栈时机错误的话，就回导致再一颗子树中无限循环。或者一颗子树访问多次。
 
     public static void main(String[] args) {
+        List<String> ks = new ArrayList<>();
+        int[] dsad = new int[2];
         TreeNode treeNode1 = new TreeNode(1);
         TreeNode treeNode2 = new TreeNode(2);
         TreeNode treeNode3 = new TreeNode(3);
@@ -36,12 +38,15 @@ public class Solution {//二叉树的中序遍历
         treeNode3.right = treeNode2;
         treeNode5.left = treeNode6;
         treeNode5.right = treeNode7;
-
-        List<Integer> list = floorOrderTravelSal(treeNode4);
+        /*SeqTraverse seqTraverse  = new SeqTraverse();
+        seqTraverse.Solution(treeNode4);*/
+        NumsOfTreeNode numsOfTreeNode = new NumsOfTreeNode();
+        System.out.println(numsOfTreeNode.Solution(treeNode4));
+        /*List<Integer> list = floorOrderTravelSal(treeNode4);
         for(Integer num : list)
         {
             System.out.println(num);
-        }
+        }*/
     }
 
    /* public static void inOrderTravelSal(TreeNode rootNode)

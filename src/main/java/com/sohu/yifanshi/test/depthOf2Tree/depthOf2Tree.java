@@ -57,7 +57,8 @@ public class depthOf2Tree {
                 if(pointer.left!=null)
                     treeNodeQueue.add(pointer.left);
                 size--;
-            }
+            }//这个函数稍微改以下就能改成算出二叉树宽度的算法（二叉树宽度为各层节点的最大值。）只要记录选最大的size
+            //（size对应的是每一层的节点数），最大的size就是宽度了。
 
         }
         return depth;
