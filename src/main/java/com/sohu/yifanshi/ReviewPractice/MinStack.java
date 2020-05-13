@@ -7,7 +7,7 @@ import java.util.Stack;
 public class MinStack {
     private Stack<Integer> mainStack;
     private Stack<Integer> minStack ;
-    LinkedList
+    //LinkedList
     public MinStack() {
         mainStack = new Stack();
         minStack = new Stack();
