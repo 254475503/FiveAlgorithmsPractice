@@ -15,8 +15,7 @@ public class FindNthdigit {
             start *= 10;
             count = digit * start * 9;
         }
-        ReentrantLock lock = new ReentrantLock();
-        lock.lock();
+
         long num = start + (n - 1) / digit; // 2.减去前面所有的位数，剩下的n就是i位数开始以后往后算的位数了，如何定位n在那个数上？就是这个公式
         return Long.toString(num).charAt((n - 1) % digit) - '0'; // 3.使用string来定位是这个数的第几位。
     }
