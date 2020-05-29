@@ -4,6 +4,7 @@ import org.junit.Test;
 
 public class solution {
     //将rob198题中一条线的家改为圈。一圈这样的家，不偷相邻的。
+    //解题思路，num[0]与nums[length-1]这两家只能偷的了一家。将这两种情况分别分成两个链式的情况去讨论
     public int dpsolve(int[] nums)
     {
         if(nums.length==0)
