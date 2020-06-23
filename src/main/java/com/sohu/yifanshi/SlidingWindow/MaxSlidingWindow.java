@@ -6,13 +6,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MaxSlidingWindow {
-    public static void main(String[] args) throws IOException {
+    private ArrayDeque<Integer> deque = new ArrayDeque<>();
+    private int[] nums;
+    /*public static void main(String[] args) throws IOException {
         MaxSlidingWindow maxSlidingWindow = new MaxSlidingWindow();
         System.out.println(System.currentTimeMillis());
         File file = new File("C:\\Users\\shiyf286\\Desktop\\test.txt");
@@ -26,6 +29,41 @@ public class MaxSlidingWindow {
         }
 
         System.out.println(sb);
+    }*/
+    public static void main(String[] args) {
+        MaxSlidingWindow maxSlidingWindow = new MaxSlidingWindow();
+        maxSlidingWindow.maxSlidingWindow(new int[]{7,2,4},2);
+    }
+
+    public void fixTheDeque (int i,int k)
+    {
+        while (!deque.isEmpty()&&deque.getFirst()==i-k)
+        {
+            deque.removeFirst();
+        }
+        while (!deque.isEmpty()&&nums[i]>nums[deque.getLast()])
+        {
+            deque.removeLast();
+        }
+    }
+
+    public int[] maxSlidingWindow(int[] nums,int k){
+        if(nums==null||nums.length==0||k<1)
+            return new int[0];
+        if(k==1)
+            return nums;
+        this.nums = nums;
+        int[] result = new int[nums.length-k+1];
+        for(int i = 0 ; i < nums.length ; i++)
+        {
+            fixTheDeque(i,k);
+            deque.addLast(i);
+            if(i>=k-1)
+            {
+                result[i-k+1] = nums[deque.getFirst()];
+            }
+        }
+        return result;
     }
     private int[][] dp ;
    /* public int[] maxSlidingWindow(int[] nums, int k) {
@@ -41,11 +79,11 @@ public class MaxSlidingWindow {
         }
         return result;
     }*/
-   public int[] maxSlidingWindow(int[] nums,int k)
+   /*public int[] maxSlidingWindow(int[] nums,int k)
    {
 
         return recursive(Arrays.stream(nums).boxed().collect(Collectors.toList()),1,k).stream().mapToInt(Integer::valueOf).toArray();
-   }
+   }*/
     public List<Integer> recursive(List<Integer> nums,int k,int target)
     {
         if(k==target)
