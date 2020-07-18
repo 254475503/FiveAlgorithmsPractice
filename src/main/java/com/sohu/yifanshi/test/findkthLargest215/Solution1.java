@@ -1,9 +1,14 @@
 package com.sohu.yifanshi.test.findkthLargest215;
 
+import java.util.function.Consumer;
+
 public class Solution1 {
     public static void main(String[] args) {
         Solution1 solution1 = new Solution1();
         System.out.println(solution1.findKthLargest(new int[]{5,2,4,1,3,6,0},4));
+        Consumer consumer = System.out::println;
+        Consumer consumer1 = (n)->System.out.println(n+"function2");
+        consumer.andThen(consumer1).accept("hello");
     }
     public int findKthLargest(int[] nums, int k) {
         int[] heap = new int[k+1];
