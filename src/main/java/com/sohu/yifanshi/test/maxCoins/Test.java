@@ -7,5 +7,7 @@ public class Test {
         System.out.println(Solution.maxCoins(nums));
         long endTime = System.currentTimeMillis();
         System.out.println(endTime-startTime);
+        Solution solution = new Solution();
+        System.out.println(solution.maxCoin(new int[]{3,1,5,8}));
     }
 }

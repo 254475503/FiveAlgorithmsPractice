@@ -17,6 +17,7 @@ import java.util.List;
 你可以假设 nums[-1] = nums[n] = 1，但注意它们不是真实存在的所以并不能被戳破。
 0 ≤ n ≤ 500, 0 ≤ nums[i] ≤ 100*/
 public class Solution {
+    private  int[][] dp;
     public static int maxCoins(int[] nums)
     {
         List<Integer> list = new ArrayList<Integer>();
@@ -53,4 +54,50 @@ public class Solution {
     {
         return i>j? i : j;
     }
+
+    public int maxCoin(int[] nums)
+    {
+        this.dp = new int[nums.length+2][nums.length+2];
+        for(int i = 1; i < nums.length+1 ; i ++)
+        {
+            dp[i][i] = nums[i-1];
+        }
+        for(int i = 1 ; i< nums.length ; i ++)
+        {
+            dp[i][i+1] = nums[i-1]*nums[i]+Math.max(nums[i],nums[i-1]);
+        }
+        dp[0][0] = dp[nums.length+1][nums.length+1] = 1;
+        dp[0][1] = nums[0];
+        dp[nums.length][nums.length+1] = nums[nums.length-1];
+       for(int i = 2 ; i < nums.length ;i++)
+       {
+           for(int j = 1 ; j <= nums.length - i ; j++)
+           {
+               int temp = Integer.MIN_VALUE;
+               for(int k = j; k <= j+i; k++)
+               {
+                   temp = Math.max(nums[k-1]*getnum(k-2,nums)*getnum(k,nums)+calculate(j,k-1)+calculate(k+1,j+i),temp);
+               }
+               dp[j][j+i] = temp;
+           }
+       }
+       return dp[1][nums.length];
+    }
+    public int getnum(int i ,int[] nums)
+    {
+        if(i==-1||i==nums.length)
+            return 1;
+        else
+            return nums[i];
+    }
+
+    public int calculate(int i , int j)
+    {
+        if(i>j)
+            return 0;
+        else
+            return dp[i][j];
+    }
+
+
 }
