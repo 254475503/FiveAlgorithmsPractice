@@ -58,30 +58,26 @@ public class Solution {
     public int maxCoin(int[] nums)
     {
         this.dp = new int[nums.length+2][nums.length+2];
-        for(int i = 1; i < nums.length+1 ; i ++)
+        int[] newnums = new int[nums.length+2];
+        for(int i = 1 ; i <=nums.length ; i++)
         {
-            dp[i][i] = nums[i-1];
+            newnums[i] = nums[i-1];
         }
-        for(int i = 1 ; i< nums.length ; i ++)
+        newnums[0] = 1;
+        newnums[newnums.length-1] = 1;
+        for(int i = 2; i < newnums.length ; i ++)
         {
-            dp[i][i+1] = nums[i-1]*nums[i]+Math.max(nums[i],nums[i-1]);
+            for(int j = 0 ; j < newnums.length-i ; j++)
+            {
+                int temp = Integer.MIN_VALUE;
+                for(int k = j+1 ; k < j + i;k++)
+                {
+                    temp   = Math.max(temp,dp[j][k]+dp[k][j+i]+newnums[k]*newnums[j]*newnums[j+i]);
+                }
+                dp[j][j+i] = temp;
+            }
         }
-        dp[0][0] = dp[nums.length+1][nums.length+1] = 1;
-        dp[0][1] = nums[0];
-        dp[nums.length][nums.length+1] = nums[nums.length-1];
-       for(int i = 2 ; i < nums.length ;i++)
-       {
-           for(int j = 1 ; j <= nums.length - i ; j++)
-           {
-               int temp = Integer.MIN_VALUE;
-               for(int k = j; k <= j+i; k++)
-               {
-                   temp = Math.max(nums[k-1]*getnum(k-2,nums)*getnum(k,nums)+calculate(j,k-1)+calculate(k+1,j+i),temp);
-               }
-               dp[j][j+i] = temp;
-           }
-       }
-       return dp[1][nums.length];
+        return  dp[0][newnums.length-1];
     }
     public int getnum(int i ,int[] nums)
     {

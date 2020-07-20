@@ -1,12 +1,10 @@
-package com.sohu.yifanshi.test.KthSmallestinMatrix;
-
-import java.util.Scanner;
+package com.sohu.yifanshi.test.kthsmallestinmatrix;
 
 public class Solution {
     public static void main(String[] args) {
-        int[][] ints = new int[][]{{1,2},{1,3}};
+        int[][] ints = new int[][]{{1,2},{3,3}};
         Solution solution = new Solution();
-        solution.kthSmallest(ints,1);
+        solution.kthSmallest(ints,4);
     }
     public int kthSmallest(int[][] matrix, int k) {
         int small = matrix[0][0];
@@ -23,12 +21,9 @@ public class Solution {
         {
             while (i>=0&&matrix[i][j]>=middle)
             {
-                if(matrix[i][j]==middle) {
-                    int temp = i;
-                    while (temp >= 0 && matrix[temp][j] == middle) {
-                        multi++;
-                        temp--;
-                    }
+                if(matrix[i][j]==middle)
+                {
+                    multi++;
                     break;
                 }
                 i--;
@@ -36,9 +31,9 @@ public class Solution {
             count+=(i+1);
             j++;
         }
-        if(k<=(count)&&k>=(count-(multi-1)))
+        if(k>=(count+1)&&k<=(count+1+(multi-1)))
             return (int) middle;
         else
-            return count<k?halfSearch(matrix,(int)middle+1,big,k):halfSearch(matrix,small,(int)middle,k);
+            return count>k-1?halfSearch(matrix,small,(int)middle,k):halfSearch(matrix,(int)middle+1,big,k);
     }
 }
