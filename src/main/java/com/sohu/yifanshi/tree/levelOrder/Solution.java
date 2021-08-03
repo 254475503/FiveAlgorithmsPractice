@@ -2,8 +2,10 @@ package com.sohu.yifanshi.tree.levelOrder;
 
 import com.sohu.yifanshi.standarddatastructure.TreeNode;
 import com.sun.deploy.util.ArrayUtil;
+import com.sun.org.apache.bcel.internal.generic.FADD;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -14,7 +16,6 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class Solution {
     private static Queue<TreeNode> queue = new LinkedBlockingQueue<>();
-
     public static void main(String[] args) {
         TreeNode treeNode1 = new TreeNode(3);
         TreeNode treeNode2 = new TreeNode(9);
@@ -52,6 +53,53 @@ public class Solution {
                 i--;
             }
             result.add(vals);
+        }
+        return result;
+    }
+
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root){
+        if(root == null)
+            return new ArrayList<>();
+        Deque<TreeNode> deque = new LinkedBlockingDeque<>();
+        int temp = 1;
+        deque.add(root);
+        boolean fromRight = true;
+        List<List<Integer>> result = new ArrayList<>();
+        while (!deque.isEmpty()){
+            List<Integer> vals = new ArrayList<>();
+            int i = temp;
+            temp = 0;
+            while (i!=0){
+                TreeNode outQueueNode = null;
+                if(fromRight){
+                    outQueueNode = deque.pollFirst();
+                    if(outQueueNode.left!=null){
+                        deque.addLast(outQueueNode.left);
+                        temp++;
+                    }
+                    if(outQueueNode.right!=null){
+                        deque.addLast(outQueueNode.right);
+                        temp++;
+                    }
+                }else {
+                    outQueueNode = deque.pollLast();
+                    if(outQueueNode.right!=null){
+                        deque.addFirst(outQueueNode.right);
+                        temp++;
+                    }
+                    if(outQueueNode.left!=null){
+                        deque.addFirst(outQueueNode.left);
+                        temp++;
+                    }
+
+                }
+
+                vals.add(outQueueNode.val);
+
+                i--;
+            }
+            result.add(vals);
+            fromRight = !fromRight;
         }
         return result;
     }
